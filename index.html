@@ -26,8 +26,9 @@
 <meta name="theme-color" content="#07152D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Boku&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
 <link rel="preload" as="image" href="assets/img/hero-fireworks.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/title-machida-sakura-hanabi.png">
 
 <style>
 /* ---------------------------------------------------------------
@@ -53,7 +54,7 @@
   --col:520px;
   --gutter:max(16px, env(safe-area-inset-left, 0px));
   --gutter-r:max(16px, env(safe-area-inset-right, 0px));
-  --f-brush:"Yuji Boku","Shippori Mincho B1","Hiragino Mincho ProN",serif;
+  --f-brush:"Zen Old Mincho","Shippori Mincho B1","Hiragino Mincho ProN",serif;
   --f-mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
   --f-gothic:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
   --f-latin:"Cormorant Garamond","Times New Roman",Georgia,serif;
@@ -67,6 +68,12 @@
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
+/* 改行の作法：行頭禁則を厳格に、段落末の1〜2文字落ちを避ける */
+h1,h2,h3,p,dd,li,figcaption{line-break:strict;text-wrap:pretty}
+.lead,.hl__text,.info__note,.access__note,.gallery__note,.notice__t,.footer__copy,.copy,.info dd,.footer__facts,.menu__foot,.walk b{word-break:keep-all;overflow-wrap:anywhere}
+.sp-br{display:none}
+}
+@media (max-width:420px){.sp-br{display:inline}.lead br{display:none}}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--navy);color:var(--fg);font-family:var(--f-gothic);font-size:16px;line-height:2;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"palt"}
@@ -95,14 +102,14 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   width:var(--s,180px);height:var(--s,180px);box-shadow:0 0 0 1px var(--gold),0 0 0 5px var(--ai),0 0 0 6px var(--gold-soft),0 18px 44px rgba(0,0,0,.55)}
 .crest::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--seigaiha);background-size:50px 25px;opacity:.8;mask:radial-gradient(circle,#000 50%,transparent 72%);-webkit-mask:radial-gradient(circle,#000 50%,transparent 72%)}
 .crest__in{position:relative;display:flex;flex-direction:row-reverse;align-items:center;gap:4px;justify-content:center}
-.crest__t{writing-mode:vertical-rl;font-family:var(--f-brush);font-size:calc(var(--s,180px) * .17);letter-spacing:.02em;line-height:1.15;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .02em}
+.crest__t{writing-mode:vertical-rl;font-family:var(--f-brush);font-weight:900;font-size:calc(var(--s,180px) * .17);letter-spacing:.04em;line-height:1.12;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .02em}
 .crest__s{writing-mode:vertical-rl;font-family:var(--f-mincho);font-size:calc(var(--s,180px) * .062);letter-spacing:.3em;color:var(--gold);line-height:1}
 .crest__e{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);font-family:var(--f-latin);font-size:calc(var(--s,180px) * .05);letter-spacing:.26em;color:var(--gold);white-space:nowrap;text-transform:uppercase}
 
 /* 和文の日付（単位を小さく） */
 .jdate{font-family:var(--f-mincho);font-weight:800;letter-spacing:.04em;line-height:1;white-space:nowrap}
 .jdate .u{font-size:.5em;margin:0 .1em;vertical-align:.14em;font-weight:600;color:var(--gold)}
-.jdate .w{display:inline-grid;place-items:center;width:1.05em;height:1.05em;border-radius:50%;background:var(--gold);color:var(--sumi);font-size:.5em;vertical-align:.3em;margin-left:.4em;font-weight:700}
+.jdate .w{display:inline-flex;align-items:center;justify-content:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--gold);color:var(--sumi);font-size:.42em;line-height:1;vertical-align:.5em;margin-left:.5em;font-weight:700;letter-spacing:0;font-feature-settings:normal;overflow:visible}
 
 /* 金の帯 */
 .band{position:relative;background:var(--ai);border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:14px var(--gutter-r) 14px var(--gutter);text-align:center}
@@ -147,12 +154,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .side__foot{font-family:var(--f-latin);font-size:13px;letter-spacing:.34em;color:var(--fg-soft);line-height:1.6;text-align:center;text-transform:uppercase}
 
 /* 右：縦書きナビ */
-.nav{display:flex;flex-direction:row-reverse;gap:clamp(8px,1.1vw,20px);margin:0;padding:0;list-style:none;align-items:flex-start}
-.nav a{display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;color:var(--fg-soft);writing-mode:vertical-rl;font-family:var(--f-mincho);font-weight:600;font-size:clamp(14px,1.05vw,16px);letter-spacing:.22em;padding:6px 2px;transition:color .3s}
-.nav a::before{content:"";width:1px;height:0;background:var(--gold);transition:height .35s var(--ease)}
-.nav a em{font-style:normal;font-family:var(--f-latin);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);opacity:.8}
+.nav{display:flex;flex-direction:row-reverse;justify-content:flex-start;gap:clamp(10px,1.3vw,24px);margin:0;padding:0;list-style:none;align-items:flex-start}
+.nav li{writing-mode:vertical-rl}
+.nav a{display:block;text-decoration:none;color:var(--fg-soft);font-family:var(--f-mincho);font-weight:600;font-size:clamp(14px,1.05vw,16px);letter-spacing:.22em;padding:0 2px;transition:color .3s;text-align:start}
+.nav a::before{content:"";display:inline-block;inline-size:0;block-size:1px;background:var(--gold);margin-inline-end:.9em;vertical-align:middle;transition:inline-size .35s var(--ease)}
+.nav a[aria-current="true"]::before{inline-size:26px}
+.nav a em{display:inline-block;font-style:normal;font-family:var(--f-latin);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-inline-start:.9em;text-orientation:mixed}
 .nav a:hover,.nav a[aria-current="true"]{color:var(--white)}
-.nav a[aria-current="true"]::before{height:28px}
 
 /* ---------- 中央コンテンツ ---------- */
 .stage{position:relative;z-index:1}
@@ -174,12 +182,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 @keyframes heroIn{to{opacity:1}}@keyframes heroZoom{to{transform:scale(1)}}
 .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,11,28,.6),rgba(4,11,28,.05) 32%,rgba(4,11,28,0) 50%,rgba(4,11,28,.94) 100%)}
 .hero__kicker{position:absolute;left:max(16px,var(--gutter));top:calc(66px + env(safe-area-inset-top,0px));z-index:2;writing-mode:vertical-rl;font-family:var(--f-latin);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);opacity:0;animation:fadeUp 1s var(--ease) 1.4s forwards;margin:0}
-.hero__v{position:absolute;right:max(16px,var(--gutter-r));top:calc(66px + env(safe-area-inset-top,0px));z-index:2;writing-mode:vertical-rl;font-family:var(--f-mincho);font-weight:700;font-size:clamp(17px,4.6vw,21px);letter-spacing:.3em;line-height:1.6;color:var(--white);text-shadow:0 2px 16px rgba(4,11,28,.95);opacity:0;animation:fadeUp 1s var(--ease) 1.2s forwards;margin:0;max-height:60%}
+.hero__v{position:absolute;right:max(16px,var(--gutter-r));top:calc(66px + env(safe-area-inset-top,0px));z-index:2;writing-mode:vertical-rl;font-family:var(--f-mincho);font-weight:700;font-size:clamp(17px,4.6vw,21px);letter-spacing:.3em;line-height:1.6;color:var(--white);text-shadow:0 2px 16px rgba(4,11,28,.95);opacity:0;animation:fadeUp 1s var(--ease) 1.2s forwards;margin:0;white-space:nowrap}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .hero__title{position:absolute;left:0;right:0;bottom:6%;z-index:2;text-align:center;padding:0 max(14px,var(--gutter));opacity:0;animation:fadeUp 1.1s var(--ease) .7s forwards}
 .hero__title .en{font-family:var(--f-latin);font-size:13px;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;margin:0 0 6px;text-indent:.42em}
-.hero__title h1{margin:0;font-family:var(--f-brush);font-weight:400;font-size:clamp(44px,14.2vw,74px);line-height:1;letter-spacing:.02em;white-space:nowrap;filter:drop-shadow(0 3px 2px rgba(4,11,28,.9)) drop-shadow(0 10px 26px rgba(4,11,28,.8))}
-.hero__title h1 .yr{display:block;font-family:var(--f-mincho);font-weight:600;font-size:.3em;letter-spacing:.34em;color:var(--gold);margin-top:.25em;text-indent:.34em;filter:none}
+.hero__title h1{margin:0;line-height:1;filter:drop-shadow(0 2px 1px rgba(0,0,0,.95)) drop-shadow(0 12px 28px rgba(4,11,28,.85))}
+.hero__logo{width:min(100%,470px);height:auto;margin:0 auto;aspect-ratio:2127/458}
+.hero__title h1 .yr{display:block;font-family:var(--f-mincho);font-weight:600;font-size:clamp(15px,4.2vw,20px);letter-spacing:.34em;color:var(--gold);margin-top:12px;text-indent:.34em}
 .hero__band .jdate{font-size:clamp(32px,9vw,42px);color:var(--white)}
 .hero__band .jdate .yr{font-size:.6em;color:var(--gold);margin-right:.2em;font-weight:600}
 .hero__band .place{font-family:var(--f-mincho);font-weight:600;font-size:16px;letter-spacing:.26em;margin:10px 0 0;text-indent:.26em}
@@ -199,7 +208,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .intro .copy{font-size:clamp(23px,6.2vw,28px);margin-top:22px}
 .intro__fig{margin:30px calc(-1 * var(--gutter)) 0;max-width:none;position:relative}
 .intro__fig img{width:100%;height:auto;aspect-ratio:1200/904}
-.intro__fig::after{content:"";position:absolute;inset:12px;border:1px solid var(--gold-soft);pointer-events:none}
+.intro__ph{position:relative}
+.intro__ph::after{content:"";position:absolute;inset:12px;border:1px solid var(--gold-soft);pointer-events:none}
 .intro__fig figcaption{font-family:var(--f-mincho);font-size:12px;letter-spacing:.2em;color:var(--fg-soft);padding:10px var(--gutter) 0;text-align:right}
 
 /* ---------- ③ 開催概要 ---------- */
@@ -230,7 +240,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .hl figure{margin:0;position:relative}
 .hl img{width:100%;height:auto;max-width:100%;object-fit:cover}
 .hl__k{position:absolute;z-index:2;writing-mode:vertical-rl;font-family:var(--f-mincho);font-weight:600;font-size:13px;letter-spacing:.3em;color:var(--gold);background:var(--sumi);padding:14px 7px;line-height:1;border:1px solid var(--gold-soft);margin:0}
-.hl__k .num{font-family:var(--f-brush);font-size:26px;color:var(--white);display:block;margin-bottom:10px;letter-spacing:0}
+.hl__k .num{font-family:var(--f-brush);font-weight:900;font-size:24px;color:var(--white);display:block;margin-bottom:10px;letter-spacing:0}
 .hl__title{font-family:var(--f-mincho);font-weight:700;font-size:clamp(22px,6vw,26px);letter-spacing:.14em;line-height:1.6;margin:0;text-wrap:balance}
 .hl__text{margin:0;color:var(--fg-soft);letter-spacing:.04em}
 .hl figcaption{font-family:var(--f-mincho);font-size:12px;letter-spacing:.2em;color:var(--fg-soft);margin-top:8px;text-align:right}
@@ -347,7 +357,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* ---------- スマホ用ヘッダー / メニュー / 下部バー ---------- */
 .mhead{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top,0px)) var(--gutter-r) 10px var(--gutter);pointer-events:none;background:linear-gradient(180deg,rgba(4,11,28,.8),rgba(4,11,28,0))}
 .mhead > *{pointer-events:auto}
-.mhead__brand{opacity:0;transition:opacity .3s;pointer-events:none;text-decoration:none;font-family:var(--f-brush);font-size:20px;letter-spacing:.04em;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mhead__brand{opacity:0;transition:opacity .3s;pointer-events:none;text-decoration:none;font-family:var(--f-brush);font-weight:900;font-size:19px;letter-spacing:.04em;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .mhead.is-past .mhead__brand{opacity:1;pointer-events:auto}
 .menu-btn{display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 14px;border:1px solid var(--gold);color:var(--white);background:rgba(4,11,28,.55);font-family:var(--f-latin);font-size:13px;letter-spacing:.3em;text-transform:uppercase;backdrop-filter:blur(6px)}
 .menu-btn svg{width:18px;height:18px}
@@ -356,7 +366,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .menu > *{position:relative}
 .menu.is-open{display:flex}
 .menu__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
-.menu__title{margin:0;line-height:1.2;font-family:var(--f-brush);font-size:26px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.menu__title{margin:0;line-height:1.2;font-family:var(--f-brush);font-weight:900;font-size:26px;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .menu__title small{display:block;font-family:var(--f-latin);font-size:11px;letter-spacing:.3em;color:var(--gold);-webkit-text-fill-color:var(--gold);text-transform:uppercase;margin-bottom:4px}
 .menu__close{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center}
 .menu__close svg{width:20px;height:20px}
@@ -405,9 +415,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .poster{gap:8px;margin-top:0}
   .poster .crest{--s:120px}
   .poster__date{font-size:20px}
-  .nav a{font-size:12px;padding:2px;letter-spacing:.14em;gap:0}
+  .nav a{font-size:12px;padding:0 1px;letter-spacing:.14em}
   .nav a em{display:none}
-  .nav{gap:6px}
+  .nav a::before{margin-inline-end:.5em}
+  .nav{gap:8px}
   .side__foot{display:none}
 }
 @media (min-width:900px) and (max-width:1100px){
@@ -422,6 +433,17 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .hl__item--b{grid-template-columns:1fr 1.2fr}
   .walk{grid-template-columns:1fr}
 }
+@media (max-width:420px){.pc-br{display:none}
+  .info .row{grid-template-columns:1fr;gap:2px;padding:12px 0}
+  .info dt{font-size:12px}
+  .info dd b{font-size:17px}
+  .hero__times b{font-size:21px;white-space:nowrap}
+  .hl__item--b{grid-template-columns:1fr}
+  .hl__item--b figure{grid-row:auto;width:72%;margin-left:auto}
+  .hl__item--b .hl__title{writing-mode:horizontal-tb;min-height:0;justify-self:start;margin:0}
+  .hl__item--b .hl__body{padding-bottom:0}
+  .tt time{font-size:22px}.tt li.is-fw time{font-size:26px}
+  .tt span{font-size:12px;letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -499,10 +521,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <img src="assets/img/hero-fireworks.webp" width="1080" height="1258" alt="夜空に大きく広がる青い花火" fetchpriority="high" decoding="async">
       <div class="hero__scrim" aria-hidden="true"></div>
       <p class="hero__kicker">Warmblue Machida 2027</p>
-      <p class="hero__v">春の町田に、やさしい青が咲く。</p>
+      <p class="hero__v">春の町田に、<br>やさしい青が咲く。</p>
       <div class="hero__title">
         <p class="en">Machida Sakura Fireworks</p>
-        <h1><span class="goldtxt">まちだ桜花火</span><span class="yr">二〇二七</span></h1>
+        <h1><img class="hero__logo" src="assets/img/title-machida-sakura-hanabi.png" width="2127" height="458" alt="まちだ桜花火" fetchpriority="high" decoding="async"><span class="yr">二〇二七</span></h1>
       </div>
     </div>
     <div class="band hero__band">
@@ -523,9 +545,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <section class="sec sec--ai intro reveal" aria-labelledby="intro-h">
     <div class="rule" aria-hidden="true"></div>
     <h2 class="copy" id="intro-h">見上げる夜空が、<br>つながるきっかけに。</h2>
-    <p class="lead">春の芹ヶ谷公園に、青い花火が咲く。<br>桜のライトアップやキッチンカーを楽しみながら、<br>大切な人と、同じ空を見上げるひとときを。<br>町田の夜を彩る、WARMBLUEへ。</p>
+    <p class="lead">春の芹ヶ谷公園に、<wbr>青い花火が咲く。<br>桜のライトアップや<wbr>キッチンカーを<wbr>楽しみながら、<br>大切な人と、<wbr>同じ空を<wbr>見上げる<wbr>ひとときを。<br>町田の夜を彩る、<wbr>WARMBLUEへ。</p>
     <figure class="intro__fig">
-      <img src="assets/img/intro-sakura-plaza.webp" width="1200" height="904" alt="青くライトアップされた桜の枝の下、広場に並ぶ出店と人々" loading="lazy" decoding="async">
+      <div class="intro__ph"><img src="assets/img/intro-sakura-plaza.webp" width="1200" height="904" alt="青くライトアップされた桜の枝の下、広場に並ぶ出店と人々" loading="lazy" decoding="async"></div>
       <figcaption>過去開催の様子</figcaption>
     </figure>
   </section>
@@ -537,7 +559,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <div class="row"><dt>名称</dt><dd><b data-ev="name">まちだ桜花火 2027</b></dd></div>
       <div class="row"><dt>開催日</dt><dd><b data-ev="dateJa">2027年4月2日（金）</b></dd></div>
       <div class="row"><dt>時間</dt><dd>イベント <span class="t"><span data-ev="eventStart">17:30</span>〜<span data-ev="eventEnd">20:00</span></span><span class="sub fw">花火打ち上げ <span class="t"><span data-ev="fireworksStart">19:00</span>〜</span></span></dd></div>
-      <div class="row"><dt>会場</dt><dd><b data-ev="venue">芹ヶ谷公園・多目的広場</b><span class="sub" data-ev="address">東京都町田市原町田5-16</span></dd></div>
+      <div class="row"><dt>会場</dt><dd><b data-ev="venue" style="white-space:nowrap">芹ヶ谷公園・多目的広場</b><span class="sub" data-ev="address">東京都町田市原町田5-16</span></dd></div>
       <div class="row"><dt>内容</dt><dd data-ev="contents">花火、桜のライトアップ、飲食キッチンカーの出店</dd></div>
       <div class="row"><dt>主催</dt><dd data-ev="organizer">ウォームブルーまちだ実行委員会</dd></div>
     </dl>
@@ -546,7 +568,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <li class="is-fw"><span class="k">打上</span><time data-ev="fireworksStart">19:00</time><span>花火打ち上げ</span></li>
       <li><span class="k">閉場</span><time data-ev="eventEnd">20:00</time><span>イベント終了</span></li>
     </ol>
-    <p class="info__note">イベント開始は17:30、花火の打ち上げ開始は19:00です。<br>お間違えのないようお越しください。</p>
+    <p class="info__note">イベント開始は17:30、<wbr>花火の打ち上げは19:00です。<br>お間違えのないよう<wbr>お越しください。</p>
   </section>
 
   <!-- ④ 楽しみ方 -->
@@ -555,15 +577,15 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     <div class="hl">
       <article class="hl__item hl__item--a">
         <figure><p class="hl__k" aria-hidden="true"><span class="num">壱</span>花火</p><img src="assets/img/hl-fireworks.webp" width="1200" height="810" alt="夜空に広がる青い花火" loading="lazy" decoding="async"><figcaption>過去開催の様子</figcaption></figure>
-        <div class="hl__body"><h3 class="hl__title">夜空に咲く、花火</h3><p class="hl__text">春の夜空を彩る花火を、芹ヶ谷公園で。</p></div>
+        <div class="hl__body"><h3 class="hl__title">夜空に咲く、花火</h3><p class="hl__text">春の夜空を彩る花火を、<wbr>芹ヶ谷公園で。</p></div>
       </article>
       <article class="hl__item hl__item--b">
         <figure><p class="hl__k" aria-hidden="true"><span class="num">弐</span>夜桜</p><img src="assets/img/hl-sakura.webp" width="900" height="1195" alt="青い光に照らされた桜の花のクローズアップ" loading="lazy" decoding="async"><figcaption>過去開催の様子</figcaption></figure>
-        <div class="hl__body"><h3 class="hl__title">光に包まれる、桜</h3><p class="hl__text">ライトアップされた桜とともに、いつもと違う公園の景色を。</p></div>
+        <div class="hl__body"><h3 class="hl__title">光に包まれる、桜</h3><p class="hl__text">ライトアップされた<wbr>桜とともに、<wbr>いつもと違う<wbr>公園の景色を。</p></div>
       </article>
       <article class="hl__item hl__item--c">
         <figure><p class="hl__k" aria-hidden="true"><span class="num">参</span>出店</p><img src="assets/img/hl-kitchencar.webp" width="1200" height="904" alt="青くライトアップされた木々を背に並ぶキッチンカーと来場者" loading="lazy" decoding="async"><figcaption>過去開催の様子</figcaption></figure>
-        <div class="hl__body"><h3 class="hl__title">おいしい時間も、いっしょに。</h3><p class="hl__text">飲食キッチンカーの出店も。花火を待つ時間もお楽しみください。</p></div>
+        <div class="hl__body"><h3 class="hl__title">おいしい時間も、いっしょに。</h3><p class="hl__text">飲食キッチンカーの<wbr>出店も。<wbr>花火を待つ時間も<wbr>お楽しみください。</p></div>
       </article>
     </div>
   </section>
@@ -571,19 +593,19 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <!-- ④-2 参加キッチンカー紹介 -->
   <section class="sec sec--inner sec--ai kc reveal" id="kitchencar" aria-labelledby="kc-h" tabindex="-1">
     <div class="sec-head"><p class="en">Kitchen Car</p><h2 class="ja" id="kc-h">参加キッチンカー紹介</h2><span class="orn" aria-hidden="true"><i></i></span></div>
-    <p class="lead kc__lead">花火を待つ時間を彩る、飲食キッチンカーの出店があります。</p>
+    <p class="lead kc__lead">花火を待つ時間を彩る、<br>飲食キッチンカーの<wbr>出店があります。</p>
     <ul class="shops" id="shops" hidden></ul>
     <div class="notice" id="shopsEmpty">
-      <p class="notice__t">出店店舗は決まり次第、こちらでご紹介します。</p>
+      <p class="notice__t">出店店舗は決まり次第、<br>こちらでご紹介します。</p>
       <p class="notice__s">Coming Soon</p>
     </div>
   </section>
 
   <!-- ④-3 クラウドファンディングについて -->
   <section class="sec sec--inner sec--sumi cf reveal" id="crowdfunding" aria-labelledby="cf-h" tabindex="-1">
-    <div class="sec-head"><p class="en">Crowdfunding</p><h2 class="ja" id="cf-h" style="font-size:clamp(21px,5.6vw,26px);letter-spacing:.12em;text-indent:.12em">クラウドファンディングについて</h2><span class="orn" aria-hidden="true"><i></i></span></div>
+    <div class="sec-head"><p class="en">Crowdfunding</p><h2 class="ja" id="cf-h" style="font-size:clamp(21px,5.6vw,26px);letter-spacing:.12em;text-indent:.12em;white-space:nowrap">クラウドファンディング<br class="sp-br">について</h2><span class="orn" aria-hidden="true"><i></i></span></div>
     <h3 class="copy" style="text-align:center">町田の春の夜空を、<br>いっしょにつくる。</h3>
-    <p class="lead" style="text-align:center">まちだ桜花火は、地域のみなさまの<br>ご支援とともに開催を目指しています。</p>
+    <p class="lead" style="text-align:center">まちだ桜花火は、<br>地域のみなさまの<wbr>ご支援とともに<br>開催を目指しています。</p>
     <div class="cf__box" id="cfBox" hidden>
       <dl class="cf__dl">
         <div class="cf__row" id="cfPeriodRow"><dt>募集期間</dt><dd id="cfPeriod"></dd></div>
@@ -594,7 +616,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <p class="access__cta"><a class="btn btn--gold" id="cfLink" href="#" target="_blank" rel="noopener">支援ページを見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></p>
     </div>
     <div class="notice" id="cfEmpty">
-      <p class="notice__t">クラウドファンディングの詳細は、<br>準備が整い次第こちらでお知らせします。</p>
+      <p class="notice__t">クラウドファンディングの詳細は、<br>準備が整い次第、<br>こちらでお知らせします。</p>
       <p class="notice__s">Coming Soon</p>
     </div>
   </section>
@@ -607,7 +629,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     </div>
     <div class="sec-head"><p class="en">About Warmblue</p><h2 class="ja" id="about-h">WARMBLUEとは</h2><span class="orn" aria-hidden="true"><i></i></span></div>
     <h3 class="copy">青い光に、<br>理解とつながりを。</h3>
-    <p class="lead">4月2日は、世界自閉症啓発デー。<br>WARMBLUEまちだは、自閉症をはじめとする障がいへの理解を広げ、誰もが暮らしやすいまちを目指す取り組みです。<br>花火を楽しむことが、誰かを知るきっかけになる。<br>そんな、あたたかなつながりを町田から。</p>
+    <p class="lead">4月2日は、<wbr>世界自閉症啓発デー。<br>WARMBLUEまちだは、<wbr>自閉症を<wbr>はじめとする<wbr>障がいへの<wbr>理解を広げ、<wbr>誰もが<wbr>暮らしやすい<wbr>まちを目指す<wbr>取り組みです。<br>花火を楽しむことが、<wbr>誰かを知る<wbr>きっかけになる。<br>そんな、<wbr>あたたかな<wbr>つながりを<wbr>町田から。</p>
     <p class="about__link" id="officialLink" hidden>
       <a class="btn" href="#" target="_blank" rel="noopener">WARMBLUEの活動をもっと知る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
     </p>
@@ -616,7 +638,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <!-- ⑥ 写真 -->
   <section class="sec sec--sumi gallery reveal" id="gallery" aria-labelledby="gallery-h" tabindex="-1">
     <div class="sec-head"><p class="en">Gallery</p><h2 class="ja" id="gallery-h">過去開催の様子</h2><span class="orn" aria-hidden="true"><i></i></span></div>
-    <p class="gallery__note">写真はすべて過去の開催時に撮影したものです</p>
+    <p class="gallery__note">写真はすべて<wbr>過去の開催時に<wbr>撮影したものです</p>
     <ul class="grid" id="grid">
       <li><button class="thumb" type="button" data-full="assets/img/g-crowd-fireworks.webp" data-w="1400" data-h="1050" data-cap="広場から見上げる花火"><img src="assets/img/g-crowd-fireworks-sm.webp" width="640" height="480" alt="芝生の広場に集まった人々が夜空の花火を見上げている" loading="lazy" decoding="async"><span class="thumb__cap">広場から見上げる花火</span></button></li>
       <li><button class="thumb" type="button" data-full="assets/img/g-sakura-stalls.webp" data-w="1280" data-h="964" data-cap="桜と出店"><img src="assets/img/g-sakura-stalls-sm.webp" width="640" height="482" alt="青くライトアップされた桜の木と、奥に並ぶ出店" loading="lazy" decoding="async"><span class="thumb__cap">桜と出店</span></button></li>
@@ -639,7 +661,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
       <li><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="14" rx="2"/><path d="M5 10h14M8 17l-2 4M16 17l2 4M9 13.5h.01M15 13.5h.01"/></svg></span><b>小田急町田駅から</b><span class="min">徒歩約<strong data-ev="walkOdakyuMin">15</strong>分</span></li>
     </ul>
     <p class="access__cta"><a class="btn btn--gold" id="mapLink" href="https://www.google.com/maps/search/?api=1&query=%E8%8A%B9%E3%83%B6%E8%B0%B7%E5%85%AC%E5%9C%92%20%E5%A4%9A%E7%9B%AE%E7%9A%84%E5%BA%83%E5%A0%B4%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%94%BA%E7%94%B0%E5%B8%82%E5%8E%9F%E7%94%BA%E7%94%B05-16" target="_blank" rel="noopener">Googleマップで見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></p>
-    <p class="access__note">地図は会場名と住所で検索した結果を表示します。</p>
+    <p class="access__note">地図は会場名と住所で<wbr>検索した結果を表示します。</p>
   </section>
 
   <!-- ⑧ クロージング -->

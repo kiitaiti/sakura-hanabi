@@ -13,3 +13,9 @@
 
 ## 未掲載（情報未提供のため創作していません）
 入場料、打ち上げ数、雨天対応、駐車場、出店店舗、協賛企業、問い合わせ先、SNS
+
+## 題字（筆文字）について
+- ヒーローの題字は assets/img/title-machida-sakura-hanabi.png（透過PNG）。Google Fonts「Zen Old Mincho（Black）」（SIL OFL）を太らせ、
+  髭文字風の払い・墨の荒れ・飛沫を加工し、金の階調をかけたもの
+- 紋章・メニューの筆文字も同じ「Zen Old Mincho（Black）」（Google Fonts から読み込み）
+- 書家の揮毫や有料の江戸文字フォントでロゴを作った場合は、上記PNGを差し替えるだけで反映されます
